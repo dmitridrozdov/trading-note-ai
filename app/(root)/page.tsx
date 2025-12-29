@@ -165,7 +165,7 @@ const TradingNotesLanding: React.FC = () => {
       {/* Footer */}
       <footer className="relative z-10 px-6 py-12 border-t border-slate-200 mt-20">
         <div className="max-w-7xl mx-auto text-center text-slate-500">
-          <p>&copy; 2024 TradeNotes. Built with Next.js & TypeScript</p>
+          <p>&copy; 2026 TradeNotes. Built with Next.js & TypeScript</p>
         </div>
       </footer>
 
