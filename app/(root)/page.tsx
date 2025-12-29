@@ -63,12 +63,12 @@ const TradingNotesLanding: React.FC = () => {
       <nav className="relative z-10 px-6 py-6 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-2 text-2xl font-bold">
           <TrendingUp className="w-8 h-8 text-emerald-400" />
-          <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent font-ubuntu">
             TradeNotes
           </span>
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 font-ubuntu">
           <SignedOut>
             <Link 
               href="/sign-in"
@@ -104,7 +104,7 @@ const TradingNotesLanding: React.FC = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-10 px-6 pt-20 pb-32 max-w-7xl mx-auto">
+      <section className="relative z-10 px-6 pt-20 pb-32 max-w-7xl mx-auto font-ubuntu">
         <div className={`text-center transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <h1 className="text-6xl md:text-7xl font-bold mb-6 leading-tight">
             Master Your Trading
@@ -164,7 +164,7 @@ const TradingNotesLanding: React.FC = () => {
       </section>
 
       {/* Features Grid */}
-      <section className="relative z-10 px-6 py-20 max-w-7xl mx-auto">
+      <section className="relative z-10 px-6 py-20 max-w-7xl mx-auto font-ubuntu">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Everything You Need to Succeed
@@ -194,7 +194,7 @@ const TradingNotesLanding: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto">
+      <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto font-ubuntu">
         <div className="bg-gradient-to-r from-emerald-600 to-blue-700 rounded-3xl p-12 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-white/10" />
           <div className="relative z-10">
