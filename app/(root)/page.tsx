@@ -50,7 +50,7 @@ const TradingNotesLanding: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 text-slate-900 overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-blue-50 text-slate-900 overflow-hidden">
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" 
@@ -63,7 +63,7 @@ const TradingNotesLanding: React.FC = () => {
       <nav className="relative z-10 px-6 py-6 flex justify-between items-center max-w-7xl mx-auto">
         <div className="flex items-center space-x-2 text-2xl font-bold">
           <TrendingUp className="w-8 h-8 text-emerald-400" />
-          <span className="bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent font-ubuntu">
+          <span className="bg-linear-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent font-ubuntu">
             TradeNotes
           </span>
         </div>
@@ -78,7 +78,7 @@ const TradingNotesLanding: React.FC = () => {
             </Link>
             <Link 
               href="/sign-up"
-              className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 transform hover:scale-105"
+              className="px-6 py-2.5 bg-linear-to-r from-emerald-500 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 transform hover:scale-105"
             >
               Get Started
             </Link>
@@ -195,7 +195,7 @@ const TradingNotesLanding: React.FC = () => {
 
       {/* CTA Section */}
       <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto font-ubuntu">
-        <div className="bg-gradient-to-r from-emerald-600 to-blue-700 rounded-3xl p-12 text-center relative overflow-hidden">
+        <div className="bg-linear-to-r from-emerald-600 to-blue-700 rounded-3xl p-12 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-white/10" />
           <div className="relative z-10">
             <h2 className="text-4xl font-bold mb-4 text-white">
