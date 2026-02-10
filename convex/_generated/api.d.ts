@@ -8,6 +8,7 @@
  * @module
  */
 
+import type * as queries from "../queries.js";
 import type * as trades from "../trades.js";
 
 import type {
@@ -17,6 +18,7 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  queries: typeof queries;
   trades: typeof trades;
 }>;
 
