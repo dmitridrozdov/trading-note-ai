@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from '@clerk/nextjs'
 import { Ubuntu } from 'next/font/google'
+import ConvexClerkProvider from "./providers/ConvexClerkProvider";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
@@ -32,22 +33,24 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning className={`${ubuntu.variable}`}>
-        <head>
-           <link rel="preconnect" href="https://fonts.cdnfonts.com" />
-            <link
-              rel="stylesheet"
-              href="https://fonts.cdnfonts.com/css/ubuntu?styles=400,700"
-              precedence="high"
-            />
-        </head>
+      <ConvexClerkProvider>
+        <html lang="en" suppressHydrationWarning className={`${ubuntu.variable}`}>
+          <head>
+              <link rel="preconnect" href="https://fonts.cdnfonts.com" />
+              <link
+                rel="stylesheet"
+                href="https://fonts.cdnfonts.com/css/ubuntu?styles=400,700"
+                precedence="high"
+              />
+          </head>
 
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </html>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            {children}
+          </body>
+        </html>
+      </ConvexClerkProvider>
     </ClerkProvider>
   );
 }
