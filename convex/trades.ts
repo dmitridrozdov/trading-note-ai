@@ -16,8 +16,11 @@ export const createTrade = mutation({
       throw new Error("Not authenticated");
     }
 
+    // Use tokenIdentifier for Clerk or subject for other providers
+    const userId = identity.tokenIdentifier || identity.subject;
+
     const tradeId = await ctx.db.insert("trades", {
-      userId: identity.subject,
+      userId,
       asset: args.asset.toUpperCase(),
       entryPrice: args.entryPrice,
       quantity: args.quantity,
@@ -50,8 +53,9 @@ export const updateTrade = mutation({
       throw new Error("Not authenticated");
     }
 
+    const userId = identity.tokenIdentifier || identity.subject;
     const trade = await ctx.db.get(args.id);
-    if (!trade || trade.userId !== identity.subject) {
+    if (!trade || trade.userId !== userId) {
       throw new Error("Trade not found or unauthorized");
     }
 
@@ -77,8 +81,9 @@ export const deleteTrade = mutation({
       throw new Error("Not authenticated");
     }
 
+    const userId = identity.tokenIdentifier || identity.subject;
     const trade = await ctx.db.get(args.id);
-    if (!trade || trade.userId !== identity.subject) {
+    if (!trade || trade.userId !== userId) {
       throw new Error("Trade not found or unauthorized");
     }
 
@@ -97,8 +102,9 @@ export const toggleTradeType = mutation({
       throw new Error("Not authenticated");
     }
 
+    const userId = identity.tokenIdentifier || identity.subject;
     const trade = await ctx.db.get(args.id);
-    if (!trade || trade.userId !== identity.subject) {
+    if (!trade || trade.userId !== userId) {
       throw new Error("Trade not found or unauthorized");
     }
 
@@ -120,8 +126,9 @@ export const closeTrade = mutation({
       throw new Error("Not authenticated");
     }
 
+    const userId = identity.tokenIdentifier || identity.subject;
     const trade = await ctx.db.get(args.id);
-    if (!trade || trade.userId !== identity.subject) {
+    if (!trade || trade.userId !== userId) {
       throw new Error("Trade not found or unauthorized");
     }
 
