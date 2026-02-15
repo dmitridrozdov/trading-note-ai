@@ -12,9 +12,11 @@ export const getTrades = query({
       return [];
     }
 
+    const userId = identity.tokenIdentifier || identity.subject;
+
     let trades = await ctx.db
       .query("trades")
-      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", userId))
       .collect();
 
     // Apply filters
@@ -56,8 +58,9 @@ export const getTradeById = query({
       return null;
     }
 
+    const userId = identity.tokenIdentifier || identity.subject;
     const trade = await ctx.db.get(args.id);
-    if (!trade || trade.userId !== identity.subject) {
+    if (!trade || trade.userId !== userId) {
       return null;
     }
 
@@ -79,9 +82,11 @@ export const getTradeStats = query({
       };
     }
 
+    const userId = identity.tokenIdentifier || identity.subject;
+
     const trades = await ctx.db
       .query("trades")
-      .withIndex("by_user", (q) => q.eq("userId", identity.subject))
+      .withIndex("by_user", (q) => q.eq("userId", userId))
       .collect();
 
     const openPositions = trades.filter((t) => t.status === "open").length;
