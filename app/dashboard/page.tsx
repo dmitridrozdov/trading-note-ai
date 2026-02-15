@@ -11,6 +11,8 @@ import { TradeDetailModal } from "@/components/TradeDetailModal";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
+import { useAuth, useUser } from "@clerk/nextjs"; // Add this import
+
 type FilterType = "all" | "usual" | "investment" | "open" | "closed";
 type SortType = "date" | "asset" | "pnl";
 
@@ -19,6 +21,26 @@ export default function DashboardPage() {
   const [sortBy, setSortBy] = useState<SortType>("date");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedTrade, setSelectedTrade] = useState<Trade | null>(null);
+
+
+  // Debugging Clerk Authentication State
+        // const { userId, isLoaded, isSignedIn } = useAuth(); // Add this
+        // const { user } = useUser(); // Add this
+
+        // console.log("=== CLERK AUTH DEBUG ===");
+        // console.log("Is Loaded:", isLoaded);
+        // console.log("Is Signed In:", isSignedIn);
+        // console.log("User ID:", userId);
+        // console.log("User Object:", user);
+        // console.log("========================");
+
+        const authDebug = useQuery(api.debug.testAuth);
+
+        console.log("=== CONVEX AUTH DEBUG ===");
+        console.log(authDebug);
+        console.log("========================");
+
+    /// end of debugging code
 
   const trades = useQuery(api.queries.getTrades, { filter, sortBy }) || [];
   const stats = useQuery(api.queries.getTradeStats) || {
