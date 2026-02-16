@@ -61,16 +61,16 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-2xl w-full max-w-lg mx-4 shadow-2xl shadow-black/50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="bg-white border border-gray-200 rounded-2xl w-full max-w-lg mx-4 shadow-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800">
-          <h2 className="text-xl font-bold text-white">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+          <h2 className="text-xl font-bold text-gray-900">
             {trade ? "Edit Trade" : "New Trade"}
           </h2>
           <button
             onClick={onClose}
-            className="text-zinc-400 hover:text-white transition-colors p-1 hover:bg-zinc-800 rounded-lg"
+            className="text-gray-400 hover:text-gray-600 transition-colors p-1 hover:bg-gray-100 rounded-lg"
           >
             <X className="w-5 h-5" />
           </button>
@@ -80,7 +80,7 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Asset */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Asset / Ticker Symbol
             </label>
             <input
@@ -91,14 +91,14 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
               }
               placeholder="e.g., AAPL, BTC, TSLA"
               required
-              className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
             />
           </div>
 
           {/* Entry Price and Quantity */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Entry Price
               </label>
               <input
@@ -110,11 +110,11 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
                 }
                 placeholder="0.00"
                 required
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Quantity
               </label>
               <input
@@ -126,14 +126,14 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
                 }
                 placeholder="0"
                 required
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
               />
             </div>
           </div>
 
           {/* Trade Type */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Trade Type
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -142,8 +142,8 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
                 onClick={() => setFormData({ ...formData, tradeType: "usual" })}
                 className={`px-4 py-3 rounded-lg font-medium transition-all ${
                   formData.tradeType === "usual"
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-900/30"
-                    : "bg-zinc-800 text-zinc-400 hover:bg-zinc-750 hover:text-white"
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 border border-gray-200"
                 }`}
               >
                 Usual Trade
@@ -153,8 +153,8 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
                 onClick={() => setFormData({ ...formData, tradeType: "investment" })}
                 className={`px-4 py-3 rounded-lg font-medium transition-all ${
                   formData.tradeType === "investment"
-                    ? "bg-purple-600 text-white shadow-lg shadow-purple-900/30"
-                    : "bg-zinc-800 text-zinc-400 hover:bg-zinc-750 hover:text-white"
+                    ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 border border-gray-200"
                 }`}
               >
                 Investment
@@ -165,8 +165,8 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
           {/* Target Price (for usual trades) */}
           {formData.tradeType === "usual" && (
             <div>
-              <label className="block text-sm font-medium text-zinc-300 mb-2">
-                Target Price <span className="text-zinc-500">(optional)</span>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Target Price <span className="text-gray-500">(optional)</span>
               </label>
               <input
                 type="number"
@@ -179,22 +179,22 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
                   })
                 }
                 placeholder="For Fibonacci calculations"
-                className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
               />
             </div>
           )}
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-zinc-300 mb-2">
-              Notes <span className="text-zinc-500">(optional)</span>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Notes <span className="text-gray-500">(optional)</span>
             </label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               placeholder="Add any notes about this trade..."
               rows={3}
-              className="w-full px-4 py-3 bg-zinc-950 border border-zinc-800 rounded-lg text-white placeholder-zinc-600 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 transition-all resize-none"
+              className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all resize-none"
             />
           </div>
 
@@ -204,14 +204,14 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
               type="button"
               onClick={onClose}
               variant="outline"
-              className="flex-1 bg-zinc-800 hover:bg-zinc-750 text-white border-zinc-700"
+              className="flex-1 bg-white hover:bg-gray-100 text-gray-700 border-gray-300"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-medium shadow-lg shadow-emerald-900/30"
+              className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-medium shadow-lg shadow-emerald-600/30"
             >
               {isSubmitting ? "Saving..." : trade ? "Update Trade" : "Create Trade"}
             </Button>
