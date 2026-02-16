@@ -12,41 +12,41 @@ export function TradeStats({ stats }: TradeStatsProps) {
       label: "Total Trades",
       value: stats.totalTrades.toString(),
       icon: BarChart3,
-      color: "text-blue-400",
-      bgColor: "bg-blue-950/30",
-      borderColor: "border-blue-900/50",
+      color: "text-blue-600",
+      bgColor: "bg-blue-50",
+      borderColor: "border-blue-200",
     },
     {
       label: "Open Positions",
       value: stats.openPositions.toString(),
       icon: TrendingUp,
-      color: "text-cyan-400",
-      bgColor: "bg-cyan-950/30",
-      borderColor: "border-cyan-900/50",
+      color: "text-cyan-600",
+      bgColor: "bg-cyan-50",
+      borderColor: "border-cyan-200",
     },
     {
       label: "Win Rate",
       value: stats.closedTrades > 0 ? `${stats.winRate}%` : "N/A",
       icon: BarChart3,
-      color: stats.winRate >= 50 ? "text-emerald-400" : "text-amber-400",
-      bgColor: stats.winRate >= 50 ? "bg-emerald-950/30" : "bg-amber-950/30",
-      borderColor: stats.winRate >= 50 ? "border-emerald-900/50" : "border-amber-900/50",
+      color: stats.winRate >= 50 ? "text-emerald-600" : "text-amber-600",
+      bgColor: stats.winRate >= 50 ? "bg-emerald-50" : "bg-amber-50",
+      borderColor: stats.winRate >= 50 ? "border-emerald-200" : "border-amber-200",
     },
     {
       label: "Total P&L",
       value: formatCurrency(stats.totalPnL),
       icon: stats.totalPnL >= 0 ? TrendingUp : TrendingDown,
-      color: stats.totalPnL >= 0 ? "text-emerald-400" : "text-rose-400",
-      bgColor: stats.totalPnL >= 0 ? "bg-emerald-950/30" : "bg-rose-950/30",
-      borderColor: stats.totalPnL >= 0 ? "border-emerald-900/50" : "border-rose-900/50",
+      color: stats.totalPnL >= 0 ? "text-emerald-600" : "text-rose-600",
+      bgColor: stats.totalPnL >= 0 ? "bg-emerald-50" : "bg-rose-50",
+      borderColor: stats.totalPnL >= 0 ? "border-emerald-200" : "border-rose-200",
     },
     {
       label: "Portfolio Value",
       value: formatCurrency(stats.totalValue),
       icon: DollarSign,
-      color: "text-violet-400",
-      bgColor: "bg-violet-950/30",
-      borderColor: "border-violet-900/50",
+      color: "text-violet-600",
+      bgColor: "bg-violet-50",
+      borderColor: "border-violet-200",
     },
   ];
 
@@ -57,13 +57,13 @@ export function TradeStats({ stats }: TradeStatsProps) {
         return (
           <div
             key={index}
-            className={`${stat.bgColor} ${stat.borderColor} border rounded-xl p-5 backdrop-blur-sm transition-all hover:scale-105 hover:shadow-lg hover:shadow-${stat.color}/10`}
+            className={`${stat.bgColor} ${stat.borderColor} border rounded-xl p-5 backdrop-blur-sm transition-all hover:scale-105 hover:shadow-lg`}
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
+              <span className="text-xs font-medium text-gray-600 uppercase tracking-wider">
                 {stat.label}
               </span>
-              <div className={`${stat.color} p-2 rounded-lg bg-black/30`}>
+              <div className={`${stat.color} p-2 rounded-lg bg-white/60`}>
                 <Icon className="w-4 h-4" />
               </div>
             </div>
