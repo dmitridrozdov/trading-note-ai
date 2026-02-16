@@ -11,8 +11,6 @@ import { TradeDetailModal } from "@/components/TradeDetailModal";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
-import { useAuth, useUser } from "@clerk/nextjs"; // Add this import
-
 type FilterType = "all" | "usual" | "investment" | "open" | "closed";
 type SortType = "date" | "asset" | "pnl";
 
@@ -21,26 +19,6 @@ export default function DashboardPage() {
   const [sortBy, setSortBy] = useState<SortType>("date");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedTrade, setSelectedTrade] = useState<Trade | null>(null);
-
-
-  // Debugging Clerk Authentication State
-        // const { userId, isLoaded, isSignedIn } = useAuth(); // Add this
-        // const { user } = useUser(); // Add this
-
-        // console.log("=== CLERK AUTH DEBUG ===");
-        // console.log("Is Loaded:", isLoaded);
-        // console.log("Is Signed In:", isSignedIn);
-        // console.log("User ID:", userId);
-        // console.log("User Object:", user);
-        // console.log("========================");
-
-        const authDebug = useQuery(api.debug.testAuth);
-
-        console.log("=== CONVEX AUTH DEBUG ===");
-        console.log(authDebug);
-        console.log("========================");
-
-    /// end of debugging code
 
   const trades = useQuery(api.queries.getTrades, { filter, sortBy }) || [];
   const stats = useQuery(api.queries.getTradeStats) || {
@@ -57,16 +35,16 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="border-b border-zinc-800 bg-black/50 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-white">
+              <h1 className="text-2xl font-bold tracking-tight text-gray-900">
                 Trading Journal
               </h1>
-              <p className="text-sm text-zinc-500 mt-0.5">
+              <p className="text-sm text-gray-600 mt-0.5">
                 Track and analyze your trades
               </p>
             </div>
@@ -98,8 +76,8 @@ export default function DashboardPage() {
                     onClick={() => setFilter(f)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       filter === f
-                        ? "bg-zinc-800 text-white shadow-lg"
-                        : "bg-zinc-900/50 text-zinc-400 hover:text-white hover:bg-zinc-900"
+                        ? "bg-gray-900 text-white shadow-lg"
+                        : "bg-white text-gray-700 hover:text-gray-900 hover:bg-gray-100 border border-gray-200"
                     }`}
                   >
                     {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -112,7 +90,7 @@ export default function DashboardPage() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortType)}
-              className="px-4 py-2 rounded-lg bg-zinc-900/50 text-zinc-300 text-sm font-medium border border-zinc-800 focus:border-zinc-700 focus:outline-none transition-all"
+              className="px-4 py-2 rounded-lg bg-white text-gray-700 text-sm font-medium border border-gray-200 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
             >
               <option value="date">Sort by Date</option>
               <option value="asset">Sort by Asset</option>
