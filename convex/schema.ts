@@ -6,7 +6,7 @@ export default defineSchema({
     userId: v.string(),
     asset: v.string(),
     entryPrice: v.number(),
-    quantity: v.number(),
+    usdtAmount: v.number(), // Changed from quantity to USDT amount
     tradeType: v.union(v.literal("usual"), v.literal("investment")),
     createdAt: v.number(),
     // Optional fields for usual trades
