@@ -35,8 +35,8 @@ export const getTrades = query({
       trades.sort((a, b) => a.asset.localeCompare(b.asset));
     } else if (args.sortBy === "pnl") {
       trades.sort((a, b) => {
-        const pnlA = a.exitPrice ? (a.exitPrice - a.entryPrice) * a.quantity : 0;
-        const pnlB = b.exitPrice ? (b.exitPrice - b.entryPrice) * b.quantity : 0;
+        const pnlA = a.exitPrice ? ((a.exitPrice - a.entryPrice) / a.entryPrice) * a.usdtAmount : 0;
+        const pnlB = b.exitPrice ? ((b.exitPrice - b.entryPrice) / b.entryPrice) * b.usdtAmount : 0;
         return pnlB - pnlA;
       });
     } else {
@@ -102,14 +102,14 @@ export const getTradeStats = query({
 
     const totalPnL = closedTrades.reduce((sum, trade) => {
       if (trade.exitPrice) {
-        return sum + (trade.exitPrice - trade.entryPrice) * trade.quantity;
+        return sum + ((trade.exitPrice - trade.entryPrice) / trade.entryPrice) * trade.usdtAmount;
       }
       return sum;
     }, 0);
 
     const totalValue = trades
       .filter((t) => t.status === "open")
-      .reduce((sum, trade) => sum + trade.entryPrice * trade.quantity, 0);
+      .reduce((sum, trade) => sum + trade.usdtAmount, 0);
 
     return {
       totalTrades: trades.length,
