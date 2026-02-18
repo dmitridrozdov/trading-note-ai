@@ -30,17 +30,16 @@ export function TradeList({ trades, onTradeClick }: TradeListProps) {
         <div className="col-span-1">Type</div>
         <div className="col-span-1">Status</div>
         <div className="col-span-2">Entry Price</div>
-        <div className="col-span-1">Quantity</div>
-        <div className="col-span-2">Position Value</div>
+        <div className="col-span-2">USDT Amount</div>
+        <div className="col-span-2">Quantity</div>
         <div className="col-span-2">P&L</div>
-        <div className="col-span-1">Date</div>
       </div>
 
       {/* Table Body */}
       <div className="divide-y divide-gray-100">
         {trades.map((trade) => {
           const pnl = calculatePnL(trade);
-          const positionValue = trade.entryPrice * trade.quantity;
+          const quantity = trade.usdtAmount / trade.entryPrice;
           const isProfit = pnl !== null && pnl > 0;
           const isLoss = pnl !== null && pnl < 0;
 
@@ -52,8 +51,11 @@ export function TradeList({ trades, onTradeClick }: TradeListProps) {
             >
               {/* Asset */}
               <div className="col-span-2 flex items-center">
-                <div className="font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
-                  {trade.asset}
+                <div>
+                  <div className="font-bold text-gray-900 group-hover:text-emerald-600 transition-colors">
+                    {trade.asset}
+                  </div>
+                  <div className="text-xs text-gray-500">{formatDate(trade.createdAt)}</div>
                 </div>
               </div>
 
@@ -92,15 +94,17 @@ export function TradeList({ trades, onTradeClick }: TradeListProps) {
                 </span>
               </div>
 
-              {/* Quantity */}
-              <div className="col-span-1 flex items-center">
-                <span className="text-sm text-gray-600 font-mono">{trade.quantity}</span>
-              </div>
-
-              {/* Position Value */}
+              {/* USDT Amount */}
               <div className="col-span-2 flex items-center">
                 <span className="text-sm text-gray-900 font-mono font-semibold">
-                  {formatCurrency(positionValue)}
+                  {formatCurrency(trade.usdtAmount)}
+                </span>
+              </div>
+
+              {/* Quantity */}
+              <div className="col-span-2 flex items-center">
+                <span className="text-sm text-gray-600 font-mono">
+                  {quantity.toFixed(5)}
                 </span>
               </div>
 
@@ -129,11 +133,6 @@ export function TradeList({ trades, onTradeClick }: TradeListProps) {
                 ) : (
                   <span className="text-sm text-gray-400">-</span>
                 )}
-              </div>
-
-              {/* Date */}
-              <div className="col-span-1 flex items-center">
-                <span className="text-xs text-gray-500">{formatDate(trade.createdAt)}</span>
               </div>
             </div>
           );
