@@ -103,18 +103,18 @@ export function TradeDetailModal({ trade, isOpen, onClose }: TradeDetailModalPro
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
               <div className="text-xs text-gray-600 uppercase tracking-wider mb-1">
-                Quantity
+                USDT Amount
               </div>
-              <div className="text-xl font-bold text-gray-900 font-mono">
-                {trade.quantity}
+              <div className="text-xl font-bold text-emerald-600 font-mono">
+                {formatCurrency(trade.usdtAmount)}
               </div>
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
               <div className="text-xs text-gray-600 uppercase tracking-wider mb-1">
-                Position Value
+                Quantity
               </div>
-              <div className="text-xl font-bold text-emerald-600 font-mono">
-                {formatCurrency(trade.entryPrice * trade.quantity)}
+              <div className="text-xl font-bold text-gray-900 font-mono">
+                {(trade.usdtAmount / trade.entryPrice).toFixed(5)}
               </div>
             </div>
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4">
@@ -173,7 +173,7 @@ export function TradeDetailModal({ trade, isOpen, onClose }: TradeDetailModalPro
             </div>
           )}
 
-          {/* Fibonacci Calculator (for usual trades) */}
+          {/* Fibonacci Calculator (for usual trades) - ALWAYS shows for usual trades */}
           {trade.tradeType === "usual" && calculations && (
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-gray-900">
