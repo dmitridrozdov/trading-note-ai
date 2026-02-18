@@ -20,7 +20,7 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
   const [formData, setFormData] = useState<TradeFormData>({
     asset: trade?.asset || "",
     entryPrice: trade?.entryPrice || 0,
-    quantity: trade?.quantity || 0,
+    usdtAmount: trade?.usdtAmount || 0,
     tradeType: trade?.tradeType || "usual",
     targetPrice: trade?.targetPrice,
     notes: trade?.notes || "",
@@ -48,7 +48,7 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
       setFormData({
         asset: "",
         entryPrice: 0,
-        quantity: 0,
+        usdtAmount: 0,
         tradeType: "usual",
         targetPrice: undefined,
         notes: "",
@@ -59,6 +59,10 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
       setIsSubmitting(false);
     }
   };
+
+  const calculatedQuantity = formData.entryPrice > 0 
+    ? (formData.usdtAmount / formData.entryPrice).toFixed(5)
+    : "0";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
@@ -89,13 +93,13 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
               onChange={(e) =>
                 setFormData({ ...formData, asset: e.target.value.toUpperCase() })
               }
-              placeholder="e.g., AAPL, BTC, TSLA"
+              placeholder="e.g., BTC, ETH, SOL"
               required
               className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
             />
           </div>
 
-          {/* Entry Price and Quantity */}
+          {/* Entry Price and USDT Amount */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -106,7 +110,7 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
                 step="0.01"
                 value={formData.entryPrice || ""}
                 onChange={(e) =>
-                  setFormData({ ...formData, entryPrice: parseFloat(e.target.value) })
+                  setFormData({ ...formData, entryPrice: parseFloat(e.target.value) || 0 })
                 }
                 placeholder="0.00"
                 required
@@ -115,21 +119,31 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Quantity
+                USDT Amount
               </label>
               <input
                 type="number"
                 step="0.01"
-                value={formData.quantity || ""}
+                value={formData.usdtAmount || ""}
                 onChange={(e) =>
-                  setFormData({ ...formData, quantity: parseFloat(e.target.value) })
+                  setFormData({ ...formData, usdtAmount: parseFloat(e.target.value) || 0 })
                 }
-                placeholder="0"
+                placeholder="0.00"
                 required
                 className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
               />
             </div>
           </div>
+
+          {/* Calculated Quantity Display */}
+          {formData.entryPrice > 0 && formData.usdtAmount > 0 && (
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-3">
+              <div className="text-xs text-gray-600 mb-1">Calculated Quantity</div>
+              <div className="text-lg font-mono font-semibold text-gray-900">
+                {calculatedQuantity} {formData.asset || "units"}
+              </div>
+            </div>
+          )}
 
           {/* Trade Type */}
           <div>
@@ -166,7 +180,7 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
           {formData.tradeType === "usual" && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Target Price <span className="text-gray-500">(optional)</span>
+                Target Price <span className="text-gray-500">(optional - defaults to 10% gain)</span>
               </label>
               <input
                 type="number"
@@ -178,7 +192,7 @@ export function TradeFormModal({ isOpen, onClose, trade }: TradeFormModalProps) 
                     targetPrice: e.target.value ? parseFloat(e.target.value) : undefined,
                   })
                 }
-                placeholder="For Fibonacci calculations"
+                placeholder="Leave empty for automatic 10% target"
                 className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
               />
             </div>
