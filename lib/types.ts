@@ -15,6 +15,7 @@ export interface FibonacciLevel {
 
 export interface TradeCalculations {
   positionValue: number;
+  quantity: number; // Calculated from usdtAmount / entryPrice
   fibLevels: FibonacciLevel[];
   stopLoss: number;
   potentialLoss: number;
@@ -33,7 +34,7 @@ export interface TradeStats {
 export interface TradeFormData {
   asset: string;
   entryPrice: number;
-  quantity: number;
+  usdtAmount: number;
   tradeType: TradeType;
   targetPrice?: number;
   notes?: string;
